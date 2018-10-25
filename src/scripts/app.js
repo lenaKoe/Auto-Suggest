@@ -1,57 +1,89 @@
-import UIElements, {
-} from "./UIManager.js"
+import UIElements, {} from "./UIManager.js"
+import Inputs from "./Inputs.js";
 
-var input = UIElements.input,
-    suggestfield = UIElements.suggestfield,
-    languagelist = {
-        "name": [
-            "Mandarin",
-            "Englisch",
-            "Hindi",
-            "Spanisch",
-            "Arabisch",
-            "Bengali",
-            "Portugiesich",
-            "Russisch",
-            "Deutsch",
-            "Japanisch",
-            "Französisch",
-            "Javanisch",
-            "Vietnam-esisch",
-            "Lahnda",
-            "Koreanisch",
-            "Telugu",
-            "Italienisch",
-            "Marathi",
-            "Urdu"
-        ]
-    },
-    name = languagelist.name;
-
-input.oninput = function () {
-    var count = 0;
-    var suggest = new Array(count);
-    //Find matching phrases and save them into a new Array
-    for (var i = 0; i < name.length; i++) {
-        if (name[i].includes(input.value) == true) {
-            suggest[count] = name[i];
-            count++;
-        }
-    }
-    //create new div(s) and insert the suggestion name(s)
-    for (var i = 0; i < suggest.length; i++) {
-        var field = document.createElement("div");
-        field.className = "suggest-field";
-        var container = UIElements.suggestcontainer;
-        container.appendChild(field);
-        suggestfield[i].innerHTML = suggest[i];
-    }
-
-    //Delete previous divs / suggestions
-    input.onkeydown = function () {
-        var element = UIElements.suggestcontainer;
-        while (element.firstChild) {
-            element.removeChild(element.firstChild);
-        }
-    }
+var languagelist = {
+    "name": [
+        "Mandarin",
+        "Englisch",
+        "Hindi",
+        "Spanisch",
+        "Arabisch",
+        "Bengali",
+        "Portugiesich",
+        "Russisch",
+        "Deutsch",
+        "Japanisch",
+        "Französisch",
+        "Javanisch",
+        "Vietnam-esisch",
+        "Lahnda",
+        "Koreanisch",
+        "Telugu",
+        "Italienisch",
+        "Marathi",
+        "Urdu"
+    ]
 }
+
+var europeancountrylist = {
+    "name": [
+        "Albanien",
+        "Andorra",
+        "Belgien",
+        "Bosnien und Herzegowina",
+        "Bulgarien",
+        "Dänemark",
+        "Deutschland",
+        "Estland",
+        "Deutsch",
+        "Finnland",
+        "Frankreich",
+        "Griechenland",
+        "Irland	",
+        "Island",
+        "Italien",
+        "Kasachstan",
+        "Kosovo",
+        "Kroatien",
+        "Lettland",
+        "Liechtenstein",
+        "Litauen",
+        "Luxemburg",
+        "Malta",
+        "Mazedonien",
+        "Moldawien",
+        "Monaco",
+        "Montenegro",
+        "Niederlande",
+        "Norwegen",
+        "Österreich",
+        "Polen",
+        "Portugal",
+        "Rumänien",
+        "Russland",
+        "San Marino",
+        "Schweden",
+        "Schweiz",
+        "Serbien",
+        "Slowakei",
+        "Slowenien",
+        "Spanien",
+        "Tschechien",
+        "Türkei",
+        "Ukraine",
+        "Ungarn",
+        "Vatikanstadt",
+        "Vereinigtes Königreich",
+        "Weißrussland",
+    ]
+}
+
+
+
+var inputlanguage = new Inputs(UIElements.languages, languagelist, "Sprachen");
+inputlanguage.autoSuggestOnInput();
+inputlanguage.deletePreviousInput();
+
+var inputcountry = new Inputs(UIElements.europeancountries, europeancountrylist, "Europäische Länder");
+inputcountry.autoSuggestOnInput();
+inputcountry.deletePreviousInput(); 

@@ -1,7 +1,9 @@
 const UIElements = {
-    input: document.getElementById("input-field"),
+    suggestcontainer: document.getElementsByClassName("container"),
     suggestfield: document.getElementsByClassName("suggest-field"),
-    suggestcontainer: document.getElementById("suggest-container")
+    languages: document.getElementById("languages"),
+    europeancountries: document.getElementById("european-countries"),
+
 }
 
 export default UIElements;
