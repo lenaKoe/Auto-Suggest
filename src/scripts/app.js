@@ -39,7 +39,7 @@ input.oninput = function () {
             count++;
         }
     }
-    //show suggestions
+    //create new div(s) and insert the suggestion name(s)
     for (var i = 0; i < suggest.length; i++) {
         var field = document.createElement("div");
         field.className = "suggest-field";
