@@ -1,5 +1,4 @@
 import UIElements, {
-    UIManager
 } from "./UIManager.js"
 
 var input = UIElements.input,
