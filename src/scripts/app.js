@@ -1,5 +1,5 @@
 import UIElements, {} from "./UIManager.js"
-import Inputs from "./Inputs.js";
+import Inputs from "./inputs.js";
 
 var languagelist = {
     "name": [
@@ -78,12 +78,9 @@ var europeancountrylist = {
     ]
 }
 
+var inputlanguage = new Inputs(UIElements.suggestcontainer[0], UIElements.languages, languagelist, "Sprachen");
+// inputlanguage();
 
 
-var inputlanguage = new Inputs(UIElements.languages, languagelist, "Sprachen");
-inputlanguage.autoSuggestOnInput();
-inputlanguage.deletePreviousInput();
-
-var inputcountry = new Inputs(UIElements.europeancountries, europeancountrylist, "Europäische Länder");
-inputcountry.autoSuggestOnInput();
-inputcountry.deletePreviousInput(); 
+var inputcountry = new Inputs(UIElements.suggestcontainer[1], UIElements.europeancountries, europeancountrylist, "Europäische Länder");
+// inputcountry();

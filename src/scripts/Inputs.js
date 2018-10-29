@@ -1,24 +1,20 @@
 import UIElements, {} from "./UIManager.js"
 
 export default class Inputs {
-    constructor(container, languagelist, placeholder) {
-        this.container = container;
-        this.input = document.querySelector('.my-awesome-auto-suggest'); //Wie bekomme ich beide Container angesprochen?
+    constructor(suggestions, inputcontainer, languagelist) {
+        this.suggestions = suggestions;
+        this.inputcontainer = inputcontainer;
         this.languagelist = languagelist;
-        this.placeholder = placeholder;
-        console.log(document.querySelectorAll('.my-awesome-auto-suggest')); 
-
-        this.input.addEventListener("input", this.autoSuggestOnInput.bind(this)); //Keyup funktionier mit der delete Fkt nicht -> z.B. leere Zeile bei einem Treffer
-        this.input.addEventListener("keydown", this.deletePreviousInput.bind(this));
+        this.inputcontainer.addEventListener("input", this.autoSuggestOnInput.bind(this)); //Keyup funktionier mit der delete Fkt nicht -> z.B. leere Zeile bei einem Treffer
+        this.inputcontainer.addEventListener("keydown", this.deletePreviousInput.bind(this));
     }
 
     autoSuggestOnInput() {
         const suggest = [];
         const suggestfield = UIElements.suggestfield;
         const name = this.languagelist.name;
-        const value = this.input.value;
+        const value = this.inputcontainer.value;
         
-
         //Find matching phrases and save them into a new Array
         for (var i = 0; i < name.length; i++) {
             if (name[i].includes(value) == true) {
@@ -29,16 +25,15 @@ export default class Inputs {
         for (var i = 0; i < suggest.length; i++) {
             const field = document.createElement("div");
             field.className = "suggest-field";
-            console.log(this.container);
-            var parent = this.container;
+            var parent = this.suggestions;
             parent.appendChild(field);
             suggestfield[i].innerHTML = suggest[i];
         }
     }
 
     deletePreviousInput() {
-        const element = this.container;
-         while (element.firstChild) {
+        const element = this.suggestions;
+        while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
     }
