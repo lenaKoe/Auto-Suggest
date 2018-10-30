@@ -78,9 +78,18 @@ var europeancountrylist = {
     ]
 }
 
-var inputlanguage = new Inputs(UIElements.suggestcontainer[0], UIElements.languages, languagelist, "Sprachen");
-// inputlanguage();
+var oceanlist = {
+    "name": [
+        "Atlantischer Ozean ",
+        "Indischer Ozean",
+        "Pazifischer Ozean",
+        "Arktisches Mittelmeer",
+        "Amerikanisches Mittelmeer",
+        "Australasiatische Mittelmeer",
+        "Europäische Mittelmeer",
+    ]
+}
 
-
-var inputcountry = new Inputs(UIElements.suggestcontainer[1], UIElements.europeancountries, europeancountrylist, "Europäische Länder");
-// inputcountry();
+var inputlanguage = new Inputs(UIElements.inputfields[0], languagelist);
+var inputcountry = new Inputs(UIElements.inputfields[1], europeancountrylist);
+var inputocean = new Inputs(UIElements.inputfields[2], oceanlist);
