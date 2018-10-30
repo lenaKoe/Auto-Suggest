@@ -1,6 +1,6 @@
 export default class Inputs {
-    constructor(inputcontainer, languagelist, config = {}) {
-        this.inputcontainer = inputcontainer;
+    constructor(inputfield, languagelist, config = {}) {
+        this.inputfield = inputfield;
         this.languagelist = languagelist;
         this.config = {
             showSuggestions: () => {
@@ -9,7 +9,8 @@ export default class Inputs {
             visibleSuggestionCount: 8,
             ...config,
         }
-        this.inputcontainer.addEventListener("keyup", this.autoSuggestOnInput.bind(this));
+        this.inputfield.addEventListener("keyup", this.autoSuggestOnInput.bind(this));
+        this.selectAndPasteInput();
     }
 
     autoSuggestOnInput() {
@@ -20,10 +21,9 @@ export default class Inputs {
             this.initializeSuggestContainer();
             this.deletePreviousInput();
             this.hideEmptyInput();
-
             //Find matching phrases and save them into a new Array
             for (var i = 0; i < itemname.length && i <= this.config.visibleSuggestionCount; i++) {
-                if (itemname[i].includes(this.inputcontainer.value) == true) {
+                if (itemname[i].includes(this.inputfield.value) == true) {
                     suggestmatch.push(itemname[i]);
                 }
             }
@@ -34,21 +34,20 @@ export default class Inputs {
                 suggestitem.innerHTML = suggestmatch[i]
                 this.suggestioncontainer.appendChild(suggestitem);
             }
-
         }
     }
+
     deletePreviousContainer() {
-        if (this.inputcontainer.parentNode.querySelectorAll(".suggestcontainer").length >= 1) {
-            this.inputcontainer.parentNode.removeChild(this.inputcontainer.parentNode.lastChild);
+        if (this.inputfield.parentNode.querySelectorAll(".suggestcontainer").length >= 1) {0
+            this.inputfield.parentNode.removeChild(this.inputfield.parentNode.lastChild);
         }
     }
 
     initializeSuggestContainer() {
         this.suggestioncontainer = document.createElement("div");
         this.suggestioncontainer.className = "suggestcontainer";
-        this.inputcontainer.parentNode.appendChild(this.suggestioncontainer);
+        this.inputfield.parentNode.appendChild(this.suggestioncontainer);
     }
-
 
     deletePreviousInput() {
         while (this.suggestioncontainer.firstChild) {
@@ -57,10 +56,19 @@ export default class Inputs {
     }
 
     hideEmptyInput() {
-        if (this.inputcontainer.value == 0) {
+        if (this.inputfield.value == 0) {
             this.suggestioncontainer.classList.add("d-none");
         } else {
             this.suggestioncontainer.classList.remove("d-none");
         }
     }
+
+    //ToDO
+    // selectAndPasteInput() {
+    //     currentsuggestfield = this.inputfield.parentNode.lastChild.querySelectorAll(".suggest-field");
+    //     console.log(currentsuggestfield);
+    //     for (var i=0; i < currentsuggestfield.length; i++) {
+    //         console.log(currentsuggestfield.innerHTML);
+    //     }
+    // }
 }
